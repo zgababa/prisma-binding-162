@@ -1,0 +1,72 @@
+# import ProductWhereInput, ProductOrderByInput from "./generated/prisma.graphql"
+# import CategoryWhereInput, CategoryOrderByInput from "./generated/prisma.graphql"
+# import CartWhereInput, CartOrderByInput, CartCreateInput from "./generated/prisma.graphql"
+# import UserWhereInput, UserOrderByInput, UserCreateInput from "./generated/prisma.graphql"
+# import Product from "./types.graphql"
+# import Category from "./types.graphql"
+# import Cart from "./types.graphql"
+# import User from "./types.graphql"
+# import Product from "./types.graphql"
+
+type Query {
+  product(where: ProductWhereInput): Product!
+  products(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Product]!
+  category(where: ProductWhereInput): Category!
+  categories(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Category]!
+  cart(where: CartWhereInput): Cart!
+  carts(
+    where: CartWhereInput
+    orderBy: CartOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Cart]!
+  user(where: UserWhereUniqueInput): User!
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  me: User
+}
+type Mutation {
+  scrapProduct(categoryId: ID!): [Product]
+  scrapProducts: [Product]
+  scrapCategories: [Category]
+  createCart(data: CartCreateInput!): Cart!
+  updateCart(data: CartUpdateInput!, where: CartWhereUniqueInput!): Cart!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateProduct(
+    data: ProductUpdateInput!
+    where: ProductWhereUniqueInput!
+  ): Product!
+  signup(data: UserCreateInput!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+}
+type AuthPayload {
+  token: String!
+  user: User!
+}
